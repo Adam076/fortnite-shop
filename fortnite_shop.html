@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fortnite Shop — Konta</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,Helvetica,sans-serif;background:#08090d;color:#fff}
+header{padding:22px 7%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #20232c;background:#0c0e14}
+.logo{font-size:25px;font-weight:800}.logo span{color:#7c5cff}
+nav a{color:#bbb;text-decoration:none;margin-left:20px}
+.hero{text-align:center;padding:70px 20px;background:radial-gradient(circle at center,#21174b 0,#0b0c12 55%)}
+.hero h1{font-size:46px;margin-bottom:14px}.hero p{color:#b9bbc5;font-size:18px}
+.badge{display:inline-block;margin-bottom:18px;padding:8px 14px;border-radius:30px;background:#171a24;color:#9d8aff}
+.products{max-width:1100px;margin:45px auto;padding:0 20px}
+.products h2{margin-bottom:25px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+.card{background:#11131b;border:1px solid #242735;border-radius:18px;overflow:hidden;box-shadow:0 10px 30px #0005}
+.card .pic{height:150px;background:linear-gradient(135deg,#6f42ff,#151722);display:flex;align-items:center;justify-content:center;font-size:48px}
+.card .info{padding:20px}.info h3{margin-bottom:8px}.info p{color:#9da0ac;font-size:14px;line-height:1.5}
+.price{font-size:24px;font-weight:800;margin:16px 0}
+button{width:100%;padding:13px;border:0;border-radius:10px;background:#7657ff;color:white;font-weight:700;font-size:15px;cursor:pointer}
+button:hover{background:#8b71ff}
+.notice{max-width:1100px;margin:0 auto 40px;padding:18px 20px;background:#171922;border:1px solid #2b2e3a;border-radius:14px;color:#b8bac4;font-size:14px;line-height:1.5}
+footer{text-align:center;padding:30px;color:#777;border-top:1px solid #20232c}
+@media(max-width:700px){.filters{grid-template-columns:1fr}.hero h1{font-size:34px}nav{display:none}}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">⚡ <span>Fortnite</span> Shop</div>
+  <nav><a href="#oferty">Oferty</a><a href="#kontakt">Kontakt</a></nav>
+</header>
+
+<section class="hero">
+  <div class="badge">⚡ Szybka realizacja • BLIK</div>
+  <h1>Konta Fortnite</h1>
+  <p>Przykładowy sklep z ofertami — gotowy do własnej edycji.</p>
+</section>
+
+<section class="products" id="oferty">
+  <h2>Dostępne konta</h2>
+  <div class="filters">
+    <input id="search" type="search" placeholder="🔎 Czego szukasz? np. Renegade Raider, OG, konto..." oninput="filterProducts()">
+    <select id="skin" onchange="filterProducts()">
+      <option value="">Wszystkie skiny</option>
+      <option value="renegade">Renegade Raider</option>
+      <option value="ghoul">Ghoul Trooper</option>
+      <option value="ikonic">iKONIK</option>
+      <option value="galaxy">Galaxy</option>
+      <option value="og">OG</option>
+    </select>
+    <select id="sort" onchange="sortProducts()">
+      <option value="">Sortuj</option>
+      <option value="low">Cena: od najniższej</option>
+      <option value="high">Cena: od najwyższej</option>
+    </select>
+  </div>
+  <div id="noResults" class="no-results">Nie znaleziono pasujących ofert.</div>
+  <div class="grid">
+    <article class="card" data-skins="renegade og" data-name="Konto #001 Renegade Raider OG" data-price="49.99">
+      <div class="pic">🎮</div>
+      <div class="info">
+        <h3>Konto #001</h3>
+        <p>Renegade Raider • OG • przykładowa oferta.</p>
+        <div class="price">49,99 zł</div>
+        <button onclick="alert('To wersja demonstracyjna — przycisk zakupu nie pobiera pieniędzy.')">Kup teraz</button>
+      </div>
+    </article>
+    <article class="card" data-skins="ghoul og" data-name="Konto #002 Ghoul Trooper OG" data-price="79.99">
+      <div class="pic">🔥</div>
+      <div class="info">
+        <h3>Konto #002</h3>
+        <p>Ghoul Trooper • OG • przykładowa oferta.</p>
+        <div class="price">79,99 zł</div>
+        <button onclick="alert('To wersja demonstracyjna — przycisk zakupu nie pobiera pieniędzy.')">Kup teraz</button>
+      </div>
+    </article>
+    <article class="card" data-skins="ikonic galaxy" data-name="Konto #003 iKONIK Galaxy" data-price="119.99">
+      <div class="pic">👑</div>
+      <div class="info">
+        <h3>Konto #003</h3>
+        <p>iKONIK • Galaxy • przykładowa oferta.</p>
+        <div class="price">119,99 zł</div>
+        <button onclick="alert('To wersja demonstracyjna — przycisk zakupu nie pobiera pieniędzy.')">Kup teraz</button>
+      </div>
+    </article>
+  </div>
+</section>
+
+<div class="notice" id="kontakt">
+  <strong>Kontakt:</strong> kontakt@twojsklep.pl<br>
+  To jest szablon demonstracyjny. Przed uruchomieniem sprzedaży sprawdź zasady Epic Games dotyczące kont oraz wymagania prawne dotyczące sprzedaży.
+</div>
+
+<footer>© 2026 Fortnite Shop — szablon demonstracyjny</footer>
+<script>
+function filterProducts(){
+  const query = document.getElementById('search').value.toLowerCase().trim();
+  const skin = document.getElementById('skin').value;
+  const cards = [...document.querySelectorAll('.card')];
+  let visible = 0;
+
+  cards.forEach(card => {
+    const text = (card.dataset.name + ' ' + card.dataset.skins).toLowerCase();
+    const matchesQuery = !query || text.includes(query);
+    const matchesSkin = !skin || card.dataset.skins.split(' ').includes(skin);
+    const show = matchesQuery && matchesSkin;
+    card.style.display = show ? '' : 'none';
+    if(show) visible++;
+  });
+
+  document.getElementById('noResults').style.display = visible ? 'none' : 'block';
+}
+
+function sortProducts(){
+  const grid = document.querySelector('.grid');
+  const cards = [...grid.querySelectorAll('.card')];
+  const sort = document.getElementById('sort').value;
+
+  if(sort === 'low') cards.sort((a,b) => Number(a.dataset.price) - Number(b.dataset.price));
+  if(sort === 'high') cards.sort((a,b) => Number(b.dataset.price) - Number(a.dataset.price));
+
+  cards.forEach(card => grid.appendChild(card));
+  filterProducts();
+}
+</script>
+</body>
+</html>
